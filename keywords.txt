@@ -1,0 +1,26 @@
+#######################################
+# Syntax Coloring Map for AFMotor
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+DebugHelper	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+PTR	KEYWORD2
+DebugLog	KEYWORD2
+DebugPrint	KEYWORD2
+DebugPrintLine	KEYWORD2
+Log	KEYWORD2
+Print	KEYWORD2
+PrintLine	KEYWORD2
+PrintLogHeader	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+DEBUG	LITERAL1
+
