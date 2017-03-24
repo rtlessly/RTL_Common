@@ -5,19 +5,12 @@
 #include "Variant.h"
 
 
-//******************************************************************************
-/// Macro to test the sign of a number: -1=negative, 1=positive, 0=zero
-/// - Assumes that x is a type that defines operator>(arg) and operator<(arg),
-///   where arg is a numeric type (int, long, etc...)
-//******************************************************************************
-#define SIGN(x) ((x > 0) - (x < 0))
-
-
 /*******************************************************************************
  Simple formatted print functions for Serial (similar to printf but much simplified) 
 *******************************************************************************/
 extern void Print(const char* format, ...);
 extern void PrintLine(const char* format, ...);
+
 
 
 /*******************************************************************************
@@ -121,5 +114,18 @@ template <typename T> inline void swap(T& lhs, T& rhs) { T temp(lhs); lhs = rhs;
 /// - Assumes that type T has a default assignment operator
 //******************************************************************************
 template <typename T> inline void Default(T& a) { T b(); a = b; };
+
+
+/*******************************************************************************
+ Handy macro-based functions 
+*******************************************************************************/
+
+//******************************************************************************
+/// Determines if the value y is between two the values x and z (inclusive). 
+/// - Assumes that x, y, and z are of compatible types
+/// - Assumes assumes operator <= is defined for x, y, and z, and conveys the
+//    the conventional meaning
+//******************************************************************************
+#define between(x, y, z) ((x) <= (y) && (y) <= (z))
 
 #endif

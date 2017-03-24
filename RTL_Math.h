@@ -1,32 +1,55 @@
 #ifndef _RTL_Math_h_
 #define _RTL_Math_h_
 
+#include "PolarVector2D.h"
+#include "StateVector2D.h"
+
+//******************************************************************************
+/// Macro to test the sign of a number: -1=negative, 1=positive, 0=zero
+/// - Assumes that x is a numeric type that defines operator> and operator<.
+//******************************************************************************
+#define SIGN(x) ((x > 0) - (x < 0))
+
+
 /*******************************************************************************
  Fast trig functions
 *******************************************************************************/
 
 //******************************************************************************
-/// Finds ths sine of an angle specified in radians. 
-/// Only valid over the domain of -2*PI to +2*PI.
+/// Finds the sine of an angle specified in radians. 
+/// Only valid over the domain of -2π to +2π.
 //******************************************************************************
 float sine(const float angle);
 
 //******************************************************************************
-/// Finds ths sine of an angle specified in degrees. 
+/// Finds the sine of an angle specified in degrees. 
 /// Only valid over the domain of -360 to +360 degrees.
 //******************************************************************************
 float sine(const int deg);
 
 //******************************************************************************
-/// Finds ths cosine of an angle specified in radians. 
-/// Only valid over the domain of -2*PI to +2*PI.
+/// Finds the cosine of an angle specified in radians. 
+/// Only valid over the domain of -2π to +2π.
 //******************************************************************************
 float cosine(const float angle);
 
 //******************************************************************************
-/// Finds ths cosine of an angle in specified degrees. 
+/// Finds the cosine of an angle in specified degrees. 
 /// Only valid over the domain of -360 to +360 degrees.
 //******************************************************************************
 float cosine(const int deg);
+
+//******************************************************************************
+/// Finds the arctanget of two values that comprise the legs of a right triangle,
+/// where 'a' is the numerator (the 'rise') and 'b' is the denominator (the 'run'). 
+/// Division by zero is accounted for and returns the appropriately signed angle 
+/// (π/2 or -π/2).
+//******************************************************************************
+//float arctan(const float a, const float b) { return (abs(a) < 0.0001) ? 0 : ((abs(b) < 0.0001) ? HALF_PI*SIGN(a) : atan(a / b)); };
+
+/*******************************************************************************
+A fast method for computing a good approximation of 1/√x, the inverse square root.
+*******************************************************************************/
+float invsqrt(float x);
 
 #endif

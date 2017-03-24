@@ -1,7 +1,7 @@
 /*******************************************************************************
- This module implements fast trig functions for sine and cosine. The functions
- execute much faster than the standard C/C++ trig functions but at the expense 
- of small loss of precision. 
+ This module implements alternate versions of standard math functions. This
+ may work faster than the standard math functions but at the expense of small 
+ loss of precision. 
 *******************************************************************************/
 
 #include <arduino.h>;
@@ -102,4 +102,41 @@ float cosine(const float angle)
 float cosine(const int deg)
 {
     return sine(float((deg * DEG_TO_RAD) + HALF_PI));
+}
+
+
+/*******************************************************************************
+A fast method for computing the arctangent of a value.
+*******************************************************************************/
+double arctan(double x)
+{
+    const float PI_4 = PI / 4;
+    
+    return PI_4*x - x*(abs(x) - 1)*(0.2447 + 0.0663*abs(x));
+}
+
+
+/*******************************************************************************
+A fast method for computing a good approximation of 1/√x, the inverse square root.
+
+This is basically the famous implementation used by ID Software in the Quake III
+engine.
+
+How this works is pretty complicated to explain. Please refer to this wikipedia 
+article for more information: https://en.wikipedia.org/wiki/Fast_inverse_square_root
+*******************************************************************************/
+float invsqrt(float x)
+{
+    const float threehalfs = 1.5F;
+
+    float y = x;                                // The end result
+    float x2 = x * 0.5F;                        // 1/2 of x - save for later use in Newton's method
+    long  i = *(long*)&y;                       // Evil floating point bit-level hacking
+
+    i = 0x5f3759df - ( i >> 1 );                // Magic! Too complicated to explain here.
+    y = *(float*)&i;                            // Hack the hack above
+    y = y * ( threehalfs - ( x2 * y * y ) );    // 1st iteration of Newton's method to refine the result
+//  y = y * ( threehalfs - ( x2 * y * y ) );    // 2nd iteration of Newton's method, if necessary
+
+    return y;
 }
