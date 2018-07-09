@@ -1,0 +1,30 @@
+#ifndef _RTL_Print_h_
+#define _RTL_Print_h_
+
+#include <pins_arduino.h>
+#include <stdarg.h>
+
+#undef ConsoleStream
+
+#ifdef SERIAL_PORT_MONITOR
+#	define ConsoleStream SERIAL_PORT_MONITOR
+#else
+#	define ConsoleStream Serial
+#endif
+
+/*******************************************************************************
+ Simple formatted print functions for Serial (similar to printf but much simplified) 
+*******************************************************************************/
+void Printf(const char* format, ...);
+void PrintfLine(const char* format, ...);
+
+void Printfv(const char* format, va_list args);
+void PrintfLinev(const char* format, va_list args);
+
+void Printf(Stream& stream, const char* format, ...);
+void PrintfLine(Stream& stream, const char* format, ...);
+
+void Printfv(Stream& stream, const char* format, va_list args);
+void PrintfLinev(Stream& stream, const char* format, va_list args);
+
+#endif

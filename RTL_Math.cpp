@@ -7,6 +7,8 @@
 #include <arduino.h>;
 #include <inttypes.h>;
 #include "RTL_Stdlib.h"
+#include "RTL_Math.h"
+
 
 /*******************************************************************************
 This method uses a quadratic expression (i.e, a parabola) to approximate a sine 

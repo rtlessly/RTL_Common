@@ -6,6 +6,15 @@
 # Datatypes (KEYWORD1)
 #######################################
 DebugHelper	KEYWORD1
+RTL_Stdlib	KEYWORD1
+RTL_Queue	KEYWORD1
+RTL_Math	KEYWORD1
+RTL_Variant	KEYWORD1
+PolarVector2D	KEYWORD1
+StateVector2D	KEYWORD1
+Vector3	KEYWORD1
+Point2D	KEYWORD1
+
 
 #######################################
 # Methods and Functions (KEYWORD2)

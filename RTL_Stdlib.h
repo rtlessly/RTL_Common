@@ -1,17 +1,28 @@
 #ifndef _RTL_Stdlib_h_
 #define _RTL_Stdlib_h_
 
-#include "RTL_Math.h"
-#include "Variant.h"
+#include <inttypes.h>
+#include <Streaming.h>
+#include <pins_arduino.h>
 
 
 /*******************************************************************************
- Simple formatted print functions for Serial (similar to printf but much simplified) 
+ Macro to "stringize" a macro parameter
 *******************************************************************************/
-extern void Print(const char* format, ...);
-extern void PrintLine(const char* format, ...);
+#define __Stringizer__(x) #x
+#define Stringize(x) __Stringizer__(x)
 
+/*******************************************************************************
+ Helper macros for storing class name in PROGMEM (for debugging)
+*******************************************************************************/
+#define DECLARE_CLASSNAME public: static const __FlashStringHelper* _classname_;
+#define DEFINE_CLASSNAME(ClassName) static const char ClassName##_classname_[] PROGMEM = Stringize(ClassName); \
+                                    const __FlashStringHelper* ClassName::_classname_ = (const __FlashStringHelper*) ClassName##_classname_;
 
+/*******************************************************************************
+ Helper macro for converting a pointer to uint32_t
+*******************************************************************************/
+#define PTR(x) (reinterpret_cast<uint32_t>(x))
 
 /*******************************************************************************
  Helper macros for arrays
@@ -121,11 +132,30 @@ template <typename T> inline void Default(T& a) { T b(); a = b; };
 *******************************************************************************/
 
 //******************************************************************************
-/// Determines if the value y is between two the values x and z (inclusive). 
-/// - Assumes that x, y, and z are of compatible types
-/// - Assumes assumes operator <= is defined for x, y, and z, and conveys the
-//    the conventional meaning
+/// Determines if the value y is between the values x and z (inclusive). 
+/// - Assumes that value, lower, and upper are of compatible types
+/// - Assumes operator <= is defined for value, lower, and upper, and 
+///   conveys the conventional meaning
 //******************************************************************************
-#define between(x, y, z) ((x) <= (y) && (y) <= (z))
+#define between(lower, value, upper) ((lower) <= (value) && (value) <= (upper))
+
+//******************************************************************************
+/// Determines if a value is between the lower and upper values (exclusive). 
+/// - Assumes that value, lower, and upper are of compatible types
+/// - Assumes operator < is defined for value, lower, and upper, and 
+///   conveys the conventional meaning
+//******************************************************************************
+#define inside(lower, value, upper) ((lower) < (value) && (value) < (upper))
+
+//******************************************************************************
+/// Determines if a value is outside of the values lower and upper (exclusive). 
+/// - Assumes that value, lower, and upper are of compatible types
+/// - Assumes operator < is defined for value, lower, and upper, and 
+///   conveys the conventional meaning
+//******************************************************************************
+#define outside(value, lower, upper) ((value) < (lower) || (upper) < (value))
+
+
+#include "RTL_Debug.h"
 
 #endif

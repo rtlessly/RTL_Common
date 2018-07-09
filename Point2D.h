@@ -1,8 +1,6 @@
 #ifndef _Point2D_h_
 #define _Point2D_h_
 
-#include <Arduino.h>
-
 
 //******************************************************************************
 /// A struct that contains a 2D X-Y point. 
@@ -24,12 +22,9 @@ struct Point2D
     Public implementation
     ***************************************************************************/
     
-    public float R() { return sqrt(X*X + Y*Y); };
+    public: float R() { return sqrt(X*X + Y*Y); };
     
-    public float Angle() { return (X == 0 && Y == 0) ? 0.0 : atan2(Y, X); };
+    public: float Angle() { return (X == 0 && Y == 0) ? 0.0 : atan2(Y, X); };
 };
-
-
-
 
 #endif

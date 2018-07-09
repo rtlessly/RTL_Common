@@ -1,0 +1,79 @@
+#include <stdarg.h>
+#include <string.h>
+#include <Arduino.h>
+
+#include "RTL_Debug.h"
+#include "RTL_Print.h"
+
+
+
+_NullPrint_ NullDebugLog;
+
+
+
+void _DebugHelper::PrintLogHeader()
+{
+    Serial.print(millis());
+    Serial.print(": ");
+    
+    if (strlen(_className) > 0) { Serial.print(_className); Serial.print("::"); }
+}
+
+
+void _DebugHelper::Log(const char* format, ...)
+{
+    PrintLogHeader();
+
+    va_list args;
+    va_start(args, format);
+    PrintLinev(format, args);
+    va_end(args);
+}
+
+
+void _DebugHelper::Print(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    Printv(format, args);
+    va_end(args);
+}
+
+
+void _DebugHelper::PrintLine(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    PrintLinev(format, args);
+    va_end(args);
+}
+
+
+void _DebugLog(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    Print("%l: ", millis());
+    PrintLinev(format, args);
+    va_end(args);
+}
+
+
+void _DebugPrint(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    Printv(format, args);
+    va_end(args);
+}
+
+
+void _DebugPrintLine(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    PrintLinev(format, args);
+    va_end(args);
+}
+
+

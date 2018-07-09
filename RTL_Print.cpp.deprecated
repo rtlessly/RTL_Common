@@ -1,0 +1,143 @@
+#include <Arduino.h>
+#include <string.h>
+
+#include "RTL_Stdlib.h"
+#include "RTL_Print.h"
+
+
+void Printf(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    Printfv(ConsoleStream, format, args);
+    va_end(args);
+}
+
+
+
+void PrintfLine(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    PrintfLinev(ConsoleStream, format, args);
+    va_end(args);
+}
+
+
+void Printfv(const char* format, va_list args)
+{
+    Printfv(ConsoleStream, format, args); 
+}
+
+
+void PrintfLinev(const char* format, va_list args)
+{
+    PrintfLinev(ConsoleStream, format, args);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void Printf(Stream& stream, const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    Printfv(stream, format, args);
+    va_end(args);
+}
+
+
+void PrintfLine(Stream& stream, const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    PrintfLinev(stream, format, args);
+    va_end(args);
+}
+
+
+
+void PrintfLinev(Stream& stream, const char* format, va_list args)
+{
+    Printfv(stream, format, args);
+    stream.println("");
+}
+
+//******************************************************************************
+
+void Printfv(Stream& stream, const char* format, va_list args)
+{
+    const char* pStart = format;
+    const char* pEnd = format + strlen(format);
+    const char* pChar = pStart;
+   
+    while (pStart < pEnd)
+    {
+        pChar = strchr(pStart, '%');
+        
+        if (pChar != NULL)
+        {
+            ConsoleStream.write(pStart, (pChar - pStart));
+            
+            char specifier = *(++pChar);
+            
+            switch(specifier)
+            {
+                case 0:
+                    return;
+                    
+                case 'b':
+                    ConsoleStream.print(va_arg(args, bool));
+                    break;
+
+                case 'c':
+                    ConsoleStream.print(va_arg(args, char));
+                    break;
+
+                case 'f':
+                    ConsoleStream.print(va_arg(args, double));
+                    break;
+
+                case 'h':
+                    ConsoleStream.print(va_arg(args, uint16_t), HEX);
+                    break;
+
+                case 'H':
+                    ConsoleStream.print(va_arg(args, uint32_t), HEX);
+                    break;
+
+                case 'i':
+                    ConsoleStream.print(va_arg(args, int));
+                    break;
+
+                case 'l':
+                    ConsoleStream.print(va_arg(args, long));
+                    break;
+
+                case 'p':
+                    ConsoleStream.print(va_arg(args, uint16_t), HEX);
+                    break;
+
+                case 's':
+                    ConsoleStream.print(va_arg(args, char*));
+                    break;
+
+                default:
+                    ConsoleStream.print(specifier);
+                    break;
+            }
+            
+            pStart = ++pChar;
+        }
+        else
+        {
+            ConsoleStream.write(pStart);
+            pStart = pEnd;
+        }
+    }
+}
+

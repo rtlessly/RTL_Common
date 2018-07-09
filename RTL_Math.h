@@ -3,12 +3,21 @@
 
 #include "PolarVector2D.h"
 #include "StateVector2D.h"
+#include "Vector3.h"
+#include "Point2D.h"
+
 
 //******************************************************************************
 /// Macro to test the sign of a number: -1=negative, 1=positive, 0=zero
 /// - Assumes that x is a numeric type that defines operator> and operator<.
 //******************************************************************************
 #define SIGN(x) ((x > 0) - (x < 0))
+
+//******************************************************************************
+/// Macro to compute unsigned difference between two unsigned numbers. Takes 
+/// into consideration unsigned wrap-around. 
+//******************************************************************************
+#define UDIFF(x, y) abs(((int32_t)((uint32_t)x - (uint32_t)y)))
 
 
 /*******************************************************************************

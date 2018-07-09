@@ -1,24 +1,24 @@
-#ifndef _Variant_h
-#define _Variant_h
+
+#ifndef _RTL_Variant_h_
+#define _RTL_Variant_h_
 
 #include <inttypes.h>
 
 
-typedef union
-    {
-        int32_t  Long;
-        int16_t  Int;
-        int8_t   SByte;
-        uint32_t UnsignedLong;
-        uint16_t UnsignedInt;
-        uint8_t  Byte;
-        bool     Bool;
-        float    Float;
-        void*    Pointer; 
-    } 
-    variant_union_t;
+union variant_union_t
+{
+    int32_t  Long;
+    int16_t  Int;
+    int8_t   SByte;
+    uint32_t UnsignedLong;
+    uint16_t UnsignedInt;
+    uint8_t  Byte;
+    bool     Bool;
+    float    Float;
+    void*    Pointer;
+};
 
-    
+
 struct variant_t
 {
     variant_t()                     { Data.Long = 0; };
@@ -43,8 +43,9 @@ struct variant_t
     operator float()    { return Data.Float; };
     operator void*()    { return Data.Pointer; };
     operator variant_union_t()  { return Data; };
+
     template <typename T> operator T*() { return dynamic_cast<T*>(Data.Pointer); };
-    
+
     private: variant_union_t Data;
 };
 
