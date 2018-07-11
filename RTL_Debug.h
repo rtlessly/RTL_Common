@@ -48,7 +48,7 @@
 
 #if DEBUG
 #   define TRACE(x) x
-#   define DEBUG_FUNCTION_INFO const char* __functionNmae__ = __func__
+#   define DEBUG_FUNCTION_INFO const char* __functionName__ = __func__
 #   define DebugHelper _DebugHelper
 #   define DebugLog (_DebugHelper().Log())
 #else
