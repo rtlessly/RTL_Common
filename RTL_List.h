@@ -7,6 +7,9 @@ Header file for Queue template class.
 #include <inttypes.h>
 
 
+struct IndexOutOfBoundsException { };
+
+
 template <typename T, int _list_size=10> class List
 {
     public: List() : _count(0) { };
@@ -78,7 +81,7 @@ template <typename T, int _list_size=10> class List
 
         if (0 <= index && index < _count)
         {
-            memcpy(&_list[index], &list[index + 1], ((_count - index) - 1) * sizeof(*_list));
+            memcpy(&_list[index], &_list[index + 1], ((_count - index) - 1) * sizeof(*_list));
             _count--;
             removed = true;
         }
@@ -108,9 +111,10 @@ template <typename T, int _list_size=10> class List
 
     public: T Get(int index)
     {
+        T item;
         bool found = false;
 
-        noInterrupts(); // ATOMIC BLOCK BEGIN
+        noInterrupts();     // ATOMIC BLOCK BEGIN
 
         if (0 <= index && index < _count)
         {
@@ -118,9 +122,11 @@ template <typename T, int _list_size=10> class List
             found = true;
         }
 
-        interrupts(); // ATOMIC BLOCK END
+        interrupts();       // ATOMIC BLOCK END
 
-        return found;
+        if (!found) throw IndexOutOfBoundsException();
+
+        return item;
     }
 
 

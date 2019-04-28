@@ -65,6 +65,12 @@ inline ::Print& Logger()
 }
 
 
+inline ::Print& LoggerAppend()
+{
+    return ConsoleStream;
+}
+
+
 inline ::Print& Logger(const char* const functionName)
 {
     return Logger() << functionName << F(": ");

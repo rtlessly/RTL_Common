@@ -20,7 +20,7 @@ template <typename T> size_t AsciiToInt(const char* p, T& value)
 {
     auto pEnd = p;
     auto result = strtol(p, &pEnd, 10);
-    auto length = (pEnd  - p);
+    auto length = (pEnd - p);
 
     if (length > 0) value = (T)result;
      

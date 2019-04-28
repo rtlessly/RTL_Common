@@ -1,6 +1,8 @@
+#ifndef _Vector3_h_
+#define _Vector3_h_
+
 #include <stdlib.h>
 #include <inttypes.h>
-
 
 template<typename T> struct Vector3
 {
@@ -115,3 +117,5 @@ typedef Vector3<int32_t> Vector3L;
 typedef Vector3<int16_t> Vector3I;
 
 typedef Vector3<uint8_t> Vector3B;
+
+#endif

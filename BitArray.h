@@ -31,7 +31,7 @@ class BitArray
         
         _bits = (_bits & ~(_mask << shift)) | newValue;
     }
-}
+};
 
 
 class BitArray1
@@ -44,18 +44,18 @@ class BitArray1
 
     public: unsigned long operator [](const uint8_t index)
     {
-        unit8_t shift = index % maxElements;
+        uint8_t shift = index % maxElements;
         
         return ((_bits >> shift) & bitmask);  
     }
     
     public: void Set(const uint8_t index, unsigned long value)
     {
-        unit8_t shift = index % maxElements;
+        uint8_t shift = index % maxElements;
 
         _bits = (_bits & ~(bitmask << shift)) | ((value & bitmask) << shift);
     }
-}
+};
 
 
 class BitArray2
@@ -79,7 +79,7 @@ class BitArray2
         
         _bits = (_bits & ~(bitmask << shift)) | ((value & bitmask) << shift);
     }
-}
+};
 
 
 class BitArray3
@@ -103,7 +103,7 @@ class BitArray3
         
         _bits = (_bits & ~(bitmask << shift)) | ((value & bitmask) << shift);
     }
-}
+};
 
 
 class BitArray4
@@ -127,7 +127,7 @@ class BitArray4
         
         _bits = (_bits & ~(bitmask << shift)) | ((value & bitmask) << shift);
     }
-}
+};
 
 
 class BitArray5
@@ -151,7 +151,7 @@ class BitArray5
         
         _bits = (_bits & ~(bitmask << shift)) | ((value & bitmask) << shift);
     }
-}
+};
 
 
 class BitArray6
@@ -175,7 +175,7 @@ class BitArray6
         
         _bits = (_bits & ~(bitmask << shift)) | ((value & bitmask) << shift);
     }
-}
+};
 
 
 class BitArray9
@@ -199,7 +199,7 @@ class BitArray9
         
         _bits = (_bits & ~(bitmask << shift)) | ((value & bitmask) << shift);
     }
-}
+};
 
 
 class BitArray10
@@ -223,6 +223,6 @@ class BitArray10
         
         _bits = (_bits & ~(bitmask << shift)) | ((value & bitmask) << shift);
     }
-}
+};
 
 #endif 

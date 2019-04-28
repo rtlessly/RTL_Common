@@ -49,6 +49,7 @@
 ///   defined for a numeric type (int, long, etc...)
 //******************************************************************************
 #define ZERO_ARRAY(arr) if (true) { for (int i=0; i < ARRAY_LENGTH(arr); arr[i++] = 0);} else (void)0
+inline void ZeroMemory(uint8_t* dest, int length) { while (length-- > 0) *dest++ = 0; }
 
 //******************************************************************************
 /// Initializes all element of an array to their default value. 
@@ -104,8 +105,8 @@
 /// - Assumes that the srce and dest arrays are the size specified by length argument
 /// - Assumes that a copy assignment operator exists for array elements
 //******************************************************************************
-#define COPY_ARRAY_PTR(dest, srce, length) if (true) { for (int i=0; i < length; i++) dest[i] = srce[i];} else (void)0
-
+#define COPY_ARRAY_PTR(dest, srce, length) if (true) { for (int i=0; i < (length);  (dest)[i] = (srce)[i],i++); } else (void)0
+inline void CopyMemory(uint8_t* dest, const uint8_t* srce, int length) { while (length-- > 0) *dest++ = *srce++; }
 
 /*******************************************************************************
  Handy functions
