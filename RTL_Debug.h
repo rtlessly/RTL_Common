@@ -59,9 +59,21 @@
 #endif
 
 
+inline ::Print& Logger(Print& p)
+{
+    return p << millis() << F(": ");
+}
+
+
 inline ::Print& Logger()
 {
     return ConsoleStream << millis() << F(": ");
+}
+
+
+inline ::Print& LoggerAppend(Print& p)
+{
+    return p;
 }
 
 
@@ -77,9 +89,21 @@ inline ::Print& Logger(const char* const functionName)
 }
 
 
+inline ::Print& Logger(Print& p, const char* const functionName)
+{
+    return Logger(p) << functionName << F(": ");
+}
+
+
 inline ::Print& Logger(const __FlashStringHelper* functionName)
 {
     return Logger() << functionName << F(": ");
+}
+
+
+inline ::Print& Logger(Print& p, const __FlashStringHelper* functionName)
+{
+    return Logger(p) << functionName << F(": ");
 }
 
 
