@@ -2,8 +2,8 @@
 #define _RTL_Stdlib_h_
 
 #include <inttypes.h>
-#include <Streaming.h>
 #include <pins_arduino.h>
+#include <RTL_Streaming.h>
 
 
 /*******************************************************************************
@@ -18,6 +18,8 @@
 #define DECLARE_CLASSNAME public: static const __FlashStringHelper* _classname_;
 #define DEFINE_CLASSNAME(ClassName) static const char ClassName##_classname_[] PROGMEM = Stringize(ClassName); \
                                     const __FlashStringHelper* ClassName::_classname_ = (const __FlashStringHelper*) ClassName##_classname_;
+
+#define DEFINE_FUNCTION_NAME(FunctionName) static const __FlashStringHelper* _functionname_ = F( Stringize(FunctionName))
 
 /*******************************************************************************
  Helper macro for converting a pointer to uint32_t

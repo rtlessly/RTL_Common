@@ -13,12 +13,14 @@ union variant_union_t
     uint16_t UnsignedInt;
     int8_t   SByte;
     uint8_t  Byte;
-	char     Char;
+    char     Char;
     bool     Bool;
     float    Float;
     void*    Pointer;
 };
 
+inline uint16_t LoWord(variant_union_t v) { return uint16_t(v.UnsignedLong & 0x0000FFFF); };
+inline uint16_t HiWord(variant_union_t v) { return uint16_t(v.UnsignedLong >> 16); };
 
 struct variant_t
 {
@@ -33,6 +35,7 @@ struct variant_t
     variant_t(const float value)    { Data.Float = value; };
     variant_t(void* value)          { Data.Pointer = value; };
     variant_t(const variant_union_t value) { Data = value; };
+    variant_t(uint16_t loWord, uint16_t hiWord) { Data.Long = (uint32_t)((((uint32_t)hiWord) << 16) | (uint32_t)loWord); };
 
     operator int32_t()  { return Data.Long; };
     operator uint32_t() { return Data.UnsignedLong; };
@@ -46,6 +49,10 @@ struct variant_t
     operator variant_union_t()  { return Data; };
 
     template <typename T> operator T*() { return dynamic_cast<T*>(Data.Pointer); };
+
+    uint16_t LoWord() { return (uint16_t)(Data.Long & 0x0000FFFF); };
+
+    uint16_t HiWord() { return (uint16_t)(Data.Long >> 16); };
 
     private: variant_union_t Data;
 };

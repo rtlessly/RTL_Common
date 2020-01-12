@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{d9eb8df7-ff66-4ed8-a0a2-03d3344f53be}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)RTL_Debug.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)RTL_Math.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BitArray.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Debug.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Point2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PolarVector2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RTL_Conversions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RTL_Debug.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RTL_List.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RTL_Math.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RTL_Queue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RTL_Stdlib.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RTL_Variant.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StateVector2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Vector3.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)keywords.txt" />
+    <Text Include="$(MSBuildThisFileDirectory)vs-readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory).gitattributes" />
+    <None Include="$(MSBuildThisFileDirectory).gitignore" />
+  </ItemGroup>
+</Project>

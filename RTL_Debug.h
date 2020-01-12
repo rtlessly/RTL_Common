@@ -4,7 +4,6 @@
 #define __RTL_Debug_H__
 
 #include <pins_arduino.h>
-#include <Streaming.h>
 #include "RTL_Stdlib.h"
 
 

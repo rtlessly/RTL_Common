@@ -34,7 +34,7 @@ template <typename T, uint8_t _queue_size=10> class Queue
         general case, however, we have to assume that items could enter the queue both
         ways. So, to protect against this race condition, we have to disable interrupts.
 
-        Contrast this with the logic in the Dequeue() method.
+        Contrast this with the logic in the Remove() method.
         */
 
         bool isQueued = false;
