@@ -17,7 +17,10 @@
 /// Macro to compute unsigned difference between two unsigned numbers. Takes 
 /// into consideration unsigned wrap-around. 
 //******************************************************************************
-#define UDIFF(x, y) abs(((int32_t)((uint32_t)x - (uint32_t)y)))
+#define UDIFF(x, y) abs(int32_t(uint32_t(x) - uint32_t(y)))
+inline uint32_t udiff(uint32_t a, uint32_t b) { if (a > b) return(a - b); return abs(int32_t(a - b)); }
+inline uint16_t udiff(uint16_t a, uint16_t b) { if (a > b) return(a - b); return abs(int16_t(a - b)); }
+inline uint8_t  udiff(uint8_t  a, uint8_t  b) { if (a > b) return(a - b); return abs(int8_t(a - b)); }
 
 
 /*******************************************************************************
