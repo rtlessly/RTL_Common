@@ -42,10 +42,10 @@ template <typename T, uint8_t _queue_size=10> class Queue
 
         noInterrupts();                 // ATOMIC BLOCK BEGIN
 
-        if (_queueCount <= QUEUE_SIZE)
+        if (_queueCount <= EVENT_QUEUE_SIZE)
         {
             _queue[_queueTail] = item;
-            _queueTail = (_queueTail + 1) % QUEUE_SIZE;
+            _queueTail = (_queueTail + 1) % EVENT_QUEUE_SIZE;
             _queueCount++;
 
             isQueued = true;
@@ -83,7 +83,7 @@ template <typename T, uint8_t _queue_size=10> class Queue
         noInterrupts();                 // ATOMIC BLOCK BEGIN
 
         item = _queue[_queueHead];
-        _queueHead = (_queueHead + 1) % QUEUE_SIZE;
+        _queueHead = (_queueHead + 1) % EVENT_QUEUE_SIZE;
         _queueCount--;
 
         interrupts();                   // ATOMIC BLOCK END
@@ -112,7 +112,7 @@ template <typename T, uint8_t _queue_size=10> class Queue
     public: inline bool IsEmpty() { return (_queueCount == 0); };
 
 
-    private: const uint8_t QUEUE_SIZE = _queue_size;
+    private: const uint8_t EVENT_QUEUE_SIZE = _queue_size;
     private: T _queue[_queue_size];
     private: uint8_t _queueHead;
     private: uint8_t _queueTail;

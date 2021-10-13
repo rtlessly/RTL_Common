@@ -1,6 +1,12 @@
+#pragma once
 #ifndef _RTL_Stdlib_h_
 #define _RTL_Stdlib_h_
-
+/*******************************************************************************
+ * Header file for common (standard) programming support.
+ *
+ * Created 09 Jul 2016
+ * by R. Terry Lessly
+ *******************************************************************************/
 #include <inttypes.h>
 #include <pins_arduino.h>
 #include <RTL_Streaming.h>
@@ -16,7 +22,7 @@
  Helper macros for storing class name in PROGMEM (for debugging)
 *******************************************************************************/
 #define DECLARE_CLASSNAME public: static const __FlashStringHelper* _classname_;
-#define DEFINE_CLASSNAME(ClassName) static const char ClassName##_classname_[] PROGMEM = Stringize(ClassName); \
+#define DEFINE_CLASSNAME(ClassName) static constexpr char ClassName##_classname_[] PROGMEM = Stringize(ClassName); \
                                     const __FlashStringHelper* ClassName::_classname_ = (const __FlashStringHelper*) ClassName##_classname_;
 
 #define DEFINE_FUNCTION_NAME(FunctionName) static const __FlashStringHelper* _functionname_ = F( Stringize(FunctionName))

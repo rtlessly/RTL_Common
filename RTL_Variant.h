@@ -1,4 +1,4 @@
-
+#pragma once
 #ifndef _RTL_Variant_h_
 #define _RTL_Variant_h_
 
@@ -19,8 +19,10 @@ union variant_union_t
     void*    Pointer;
 };
 
+
 inline uint16_t LoWord(variant_union_t v) { return uint16_t(v.UnsignedLong & 0x0000FFFF); };
 inline uint16_t HiWord(variant_union_t v) { return uint16_t(v.UnsignedLong >> 16); };
+
 
 struct variant_t
 {

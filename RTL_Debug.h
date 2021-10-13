@@ -1,11 +1,14 @@
-// Some debugging assistance
-
+#pragma once
 #ifndef __RTL_Debug_H__
 #define __RTL_Debug_H__
-
+/*******************************************************************************
+ * Header file for debugging support.
+ *
+ * Created 09 Jul 2016
+ * by R. Terry Lessly
+ *******************************************************************************/
 #include <pins_arduino.h>
 #include "RTL_Stdlib.h"
-
 
 //******************************************************************************
 /// This provides support for conditionally compiled debug logging. Debug logging
@@ -47,11 +50,13 @@
 
 #if DEBUG
 #   define TRACE(x) x
+#   define TRACEIF(x, y) if (x) y
 #   define DEBUG_FUNCTION_INFO const char* __functionName__ = __func__
 #   define DebugHelper _DebugHelper
 #   define DebugLog (_DebugHelper().Log())
 #else
 #   define TRACE(x)
+#   define TRACEIF(x, y)
 #   define DEBUG_FUNCTION_INFO
 #   define DebugHelper _NullDebugHelper
 #   define DebugLog (NullPrint)
